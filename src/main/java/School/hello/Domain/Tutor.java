@@ -18,9 +18,9 @@ public class Tutor {
 	private int salary;
 	
 	
-	//Embedded annotations used to embeed two class with one table in the DB
-	@Embedded
-	private Address teacherAddress;
+//	//Embedded annotations used to embeed two class with one table in the DB
+//	@Embedded
+//	private Address teacherAddress;
 	
 //	Required for hibernate
 	public Tutor()
@@ -36,13 +36,13 @@ public class Tutor {
 	}
 	
 	// this constructer to create a teacher object with Embeeded Address
-	public Tutor(String tutorId,String name, int salary,String land,String city,int postnumber)
-	{
-		this.tutorID = tutorId;
-		this.name = name;
-		this.salary = salary;
-		this.teacherAddress = new Address(land,city,postnumber);
-	}
+//	public Tutor(String tutorId,String name, int salary,String land,String city,int postnumber)
+//	{
+//		this.tutorID = tutorId;
+//		this.name = name;
+//		this.salary = salary;
+//		this.teacherAddress = new Address(land,city,postnumber);
+//	}
 	
 	
 	public String getTutorID() {

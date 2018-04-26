@@ -13,6 +13,5 @@
   <property name="hibernate.hbm2ddl.auto">update</property>
   <mapping class="School.hello.Domain.Student"/>
   <mapping class="School.hello.Domain.Tutor"/>
-  <mapping class="School.hello.Domain.Address"/>
  </session-factory>
 </hibernate-configuration>

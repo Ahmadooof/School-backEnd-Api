@@ -21,7 +21,13 @@ public class Example {
 //		************ To Save Object into Database As Table ************ 
 		
 		Session session= HibernateUtility.getSesstionFactory().openSession();
-
+		session.beginTransaction();
+		
+		Student test = new Student("Ali", "ali@2e21e.com", "test", "test", 2323);
+		session.persist(test);
+		
+		session.getTransaction().commit();
+		
 //		session.beginTransaction();
 //		Student student = new Student("Martin","Martin@hotmail.com","Sweden","Vaxjo",23123);
 //		Tutor tutor = new Tutor("ABC", "Erik", 30000000, "Sweden", "vaxjo", 112233);
@@ -79,15 +85,6 @@ public class Example {
 ////		
 ////		session.getTransaction().commit();
 ////		session.close();
-		String HQL_BY_TITLE = "FROM Student ";
-		
-		@SuppressWarnings("unchecked")
-		List<Student> result = session.createQuery(HQL_BY_TITLE)
-			.getResultList();	
-		
-		for (Student s : result) {
-			System.out.println(s.getName());
-		}
 	}
 
 }
