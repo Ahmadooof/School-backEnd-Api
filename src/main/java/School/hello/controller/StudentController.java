@@ -3,6 +3,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,7 +29,7 @@ public class StudentController {
 	
 
 	@GET
-	public Response getStudents() {
+	public Response getAllStudents() {
 		String HQL_BY_TITLE = "FROM Student ";
 		
 		List<Student> result = session.createQuery(HQL_BY_TITLE)
@@ -56,41 +57,56 @@ public class StudentController {
 	@POST
 	public Response createStuden(Student student) {
 		session.beginTransaction();
-		System.out.println("Post Method");
+		
 		session.persist(student);
+		
 		session.getTransaction().commit();
+		
 		return Response.ok(200).build();
 	}
 	
 	@PUT
-	public Response update(@DefaultValue("0")Student test) {
-		System.out.println(test);
-		System.out.println(test.getName());
-		return Response.ok(test).build();
+	@Path("{id}")
+	public Response updateStudent(@PathParam("id") int id,Student newDetails) {
+		try {
+			session.beginTransaction();
+			
+			String HQL = "from Student as stu where stu.id = :id";
+			Query q = session.createQuery(HQL);
+			q.setParameter("id", id);
+			Student oldDetails =(Student) q.getSingleResult();
+			oldDetails.setName(newDetails.getName());
+			oldDetails.setEmail(newDetails.getEmail());
+			oldDetails.setLand(newDetails.getLand());
+			oldDetails.setCity(newDetails.getCity());
+			oldDetails.setPostNumber(newDetails.getPostNumber());
+			
+			session.getTransaction().commit();
+		
+		return Response.ok(newDetails).build();
+		}catch(Exception e ) {
+			System.out.println("there is fuckin exception here: " + e);
+		}
+		return null;
 	}
 	
-	@PUT
+	@DELETE
 	@Path("{id}")
-	public Response updateStudent(@DefaultValue("0") @PathParam("id") int id, Student NewStudentDetails) {
+	public Response deleteStudent(@PathParam("id") int id) {
 		try {
+			session.beginTransaction();
+			
 			String HQL = "from Student as stu where stu.id = :id";
-			Query q = session.createQuery(HQL)
-					.setParameter("id", id);      					// this line to prevent sql injections
-			Student OldStudentDetails =(Student) q.getSingleResult();
-			System.out.println("111");
-			System.out.println(id);
-			System.out.println(NewStudentDetails.getName());
-			System.out.println("222");
-			OldStudentDetails.setName(NewStudentDetails.getName());
-			OldStudentDetails.setEmail(NewStudentDetails.getEmail());
-			System.out.println("3333");
+			Query q = session.createQuery(HQL);
+			q.setParameter("id", id);
+			Student deleteStudent =(Student) q.getSingleResult();
+			session.remove(deleteStudent);
+			
 			session.getTransaction().commit();
-			return Response.ok(NewStudentDetails).build();
-		}
-		catch(Exception e )
+			return Response.ok(200).build();
+		}catch(Exception e)
 		{
-			System.out.println(e);
-			System.out.println("catchhhhhhhhhh");
+			System.out.println("exception here dude"+ e);
 		}
 		return null;
 	}
