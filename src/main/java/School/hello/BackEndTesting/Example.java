@@ -6,27 +6,18 @@ import javax.persistence.Query;
 
 import org.hibernate.Session;
 
-import School.hello.Domain.Student;
-import School.hello.Domain.Tutor;
+import School.hello.Entity.Student;
+import School.hello.Entity.Tutor;
 import School.hello.Utility.HibernateUtility;
+import net.bytebuddy.asm.Advice.This;
 
 public class Example {
 	
 	public static void main(String args[]) {
 		
 
-
-
 		
 //		************ To Save Object into Database As Table ************ 
-		
-		Session session= HibernateUtility.getSesstionFactory().openSession();
-		session.beginTransaction();
-		
-		Student test = new Student("Ali", "ali@2e21e.com", "test", "test", 2323);
-		session.persist(test);
-		
-		session.getTransaction().commit();
 		
 //		session.beginTransaction();
 //		Student student = new Student("Martin","Martin@hotmail.com","Sweden","Vaxjo",23123);

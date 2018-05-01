@@ -1,4 +1,4 @@
-package School.hello.Domain;
+package School.hello.Entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -51,7 +51,7 @@ public class Student {
 		this.postNumber = postNumber;
 	}
 
-	// cascade used to save multible objects related with each other in one line PS:"session.persist(student);"
+	// cascade used to save multible objects related with each other in one line example:"session.persist(student);"
 	@ManyToOne(cascade= CascadeType.PERSIST)
 	private Tutor supervisor;
 	
