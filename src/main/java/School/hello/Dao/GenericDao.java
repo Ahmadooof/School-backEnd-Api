@@ -1,8 +1,8 @@
-package School.hello.Service;
+package School.hello.Dao;
 
 import java.util.List;
 
-public interface GenericService<T> {
+public interface GenericDao<T> {
 	
 	public List<T> getAll();
 	public T getById(int id);

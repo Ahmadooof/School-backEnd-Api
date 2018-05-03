@@ -12,9 +12,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.hibernate.Session;
 
+import School.hello.Dao.GenericDao;
+import School.hello.Dao.GeneriDaoImpl;
 import School.hello.Entity.Student;
-import School.hello.Service.GenericService;
-import School.hello.Service.GenericServiceImpl;
 import School.hello.Utility.HibernateUtility;
 
 
@@ -23,18 +23,21 @@ import School.hello.Utility.HibernateUtility;
 @Consumes(MediaType.APPLICATION_JSON)
 public class StudentController {
 
-	private GenericService<Student> student;
+	private GenericDao<Student> student;
 	private Session session = HibernateUtility.getSesstionFactory().openSession();
 	
 	public StudentController() {
-		 this.student = new GenericServiceImpl<Student>(Student.class);
+		 this.student = new GeneriDaoImpl<Student>(Student.class);
 	}
 	
 	@GET
 	public Response getAllStudents() {
-		try {
+		try 
+		{
 		return Response.ok(student.getAll()).build();
-		}catch(Exception e) {
+		}
+		catch(Exception e)
+		{
 			System.out.println("exception"+e);
 			return null;
 		}
@@ -54,8 +57,9 @@ public class StudentController {
 	
 	@PUT
 	@Path("{id}")
-	public Response updateStudent(@PathParam("id") int id,Student newDetails) {
+	public Response updateStudent(@PathParam("id") int id,Student newDetails) throws InterruptedException {
 		this.student.updateObject(newDetails, id);	
+		System.out.println("hellooooooooo");
 		return Response.ok(200).build();
 	}
 	

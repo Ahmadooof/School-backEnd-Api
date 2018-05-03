@@ -1,4 +1,4 @@
-package School.hello.Service;
+package School.hello.Dao;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import School.hello.Utility.HibernateUtility;
 
 
 @SuppressWarnings("unchecked")
-public class GenericServiceImpl<T> implements GenericService<T> {
+public class GeneriDaoImpl<T> implements GenericDao<T> {
 
 	private Session session;
 	private Class<T> runTimeClass ;
 	private String className;
 	
-	public GenericServiceImpl(Class<T> test) {
+	public GeneriDaoImpl(Class<T> test) {
 		runTimeClass = test;
 		className = this.runTimeClass.getSimpleName();
 		session = HibernateUtility.getSesstionFactory().openSession();
