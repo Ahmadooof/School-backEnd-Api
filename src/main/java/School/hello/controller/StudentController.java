@@ -10,24 +10,34 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import org.hibernate.Session;
 
 import School.hello.Entity.Student;
-import School.hello.Service.Access;
+import School.hello.Service.GenericService;
+import School.hello.Service.GenericServiceImpl;
 import School.hello.Utility.HibernateUtility;
+
 
 @Path("students")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class StudentController {
 
-	private Access<Student> student = new Access<Student>(Student.class);
+	private GenericService<Student> student;
 	private Session session = HibernateUtility.getSesstionFactory().openSession();
-
+	
+	public StudentController() {
+		 this.student = new GenericServiceImpl<Student>(Student.class);
+	}
+	
 	@GET
 	public Response getAllStudents() {
+		try {
 		return Response.ok(student.getAll()).build();
+		}catch(Exception e) {
+			System.out.println("exception"+e);
+			return null;
+		}
 	}
 	
 	@GET
@@ -45,24 +55,8 @@ public class StudentController {
 	@PUT
 	@Path("{id}")
 	public Response updateStudent(@PathParam("id") int id,Student newDetails) {
-		try {
-		session.beginTransaction();
-		String HQL = "from Student as stu where stu.id = :id";
-		Query q = session.createQuery(HQL);
-		q.setParameter("id", id);
-		Student oldDetails =(Student) q.getSingleResult();
-		oldDetails.setName(newDetails.getName());
-		oldDetails.setEmail(newDetails.getEmail());
-		oldDetails.setLand(newDetails.getLand());
-		oldDetails.setCity(newDetails.getCity());
-		oldDetails.setPostNumber(newDetails.getPostNumber());
-		session.getTransaction().commit();		
-		return Response.ok(newDetails).build();
-		
-		}catch(Exception e) {
-			System.out.println(e);
-			return null;
-		}
+		this.student.updateObject(newDetails, id);	
+		return Response.ok(200).build();
 	}
 	
 	@DELETE
