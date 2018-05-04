@@ -43,6 +43,8 @@ public class GeneriDaoImpl<T> implements GenericDao<T> {
 		
 		session.beginTransaction();
 		session.persist(Object);
+		session.getTransaction().commit();
+		session.close();
 		return;
 	}
 
@@ -61,6 +63,7 @@ public class GeneriDaoImpl<T> implements GenericDao<T> {
 		searchForObject = (T) session.merge(ObjectFrontEnd);
 		session.getTransaction().commit();
 	}
+	
 	
 	
 

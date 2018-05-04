@@ -1,4 +1,6 @@
 package School.hello.controller;
+import java.util.List;
+
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,7 +27,6 @@ public class StudentController {
 
 	private GenericDao<Student> student;
 	private Session session = HibernateUtility.getSesstionFactory().openSession();
-	
 	public StudentController() {
 		 this.student = new GeneriDaoImpl<Student>(Student.class);
 	}

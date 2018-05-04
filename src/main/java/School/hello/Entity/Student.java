@@ -17,7 +17,7 @@ public class Student {
 	
 	// hibernate annotaions
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	private String name;
@@ -52,8 +52,8 @@ public class Student {
 	}
 
 	// cascade used to save multible objects related with each other in one line example:"session.persist(student);"
-	@ManyToOne(cascade= CascadeType.PERSIST)
-	private Tutor supervisor;
+//	@ManyToOne(cascade= CascadeType.PERSIST)
+//	private Tutor supervisor;
 	
 //	//Embedded annotations used to embeeding two class with one table in the DB
 //	@Embedded
@@ -112,13 +112,13 @@ public class Student {
 		this.email = email;
 	}
 
-	public Tutor getSupervisor() {
-		return this.supervisor;
-	}
-	
-	public void setSupervisor(Tutor supervisor) {
-		this.supervisor = supervisor;
-	}
+//	public Tutor getSupervisor() {
+//		return this.supervisor;
+//	}
+//	
+//	public void setSupervisor(Tutor supervisor) {
+//		this.supervisor = supervisor;
+//	}
 
 
 
