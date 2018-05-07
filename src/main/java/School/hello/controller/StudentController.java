@@ -14,6 +14,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.hibernate.Session;
 
+import com.squareup.okhttp.Connection;
+
 import School.hello.Dao.GenericDao;
 import School.hello.Dao.GeneriDaoImpl;
 import School.hello.Entity.Student;
@@ -26,7 +28,7 @@ import School.hello.Utility.HibernateUtility;
 public class StudentController {
 
 	private GenericDao<Student> student;
-	private Session session = HibernateUtility.getSesstionFactory().openSession();
+//	private Session session = HibernateUtility.getSesstionFactory().openSession();
 	public StudentController() {
 		 this.student = new GeneriDaoImpl<Student>(Student.class);
 	}
@@ -39,7 +41,7 @@ public class StudentController {
 		}
 		catch(Exception e)
 		{
-			System.out.println("exception"+e);
+			System.out.println(">>>>>>>>>>>>>Exception in StudentController getAll Method<<<<<<<<<<<<<" +e);
 			return null;
 		}
 	}
