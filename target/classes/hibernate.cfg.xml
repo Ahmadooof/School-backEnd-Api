@@ -4,10 +4,12 @@
 <hibernate-configuration>
  <session-factory>
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <!--  
+
+	<!--  
   <property name="hibernate.connection.password">ahmad123</property>
   <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test?serverTimezone=UTC</property>
   -->
+    
   <property name="hibernate.connection.password">ahmad1.2.3</property>
   <property name="hibernate.connection.url">jdbc:mysql://35.189.93.150/school</property>
   

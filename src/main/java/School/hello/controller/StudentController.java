@@ -28,7 +28,6 @@ import School.hello.Utility.HibernateUtility;
 public class StudentController {
 
 	private GenericDao<Student> student;
-//	private Session session = HibernateUtility.getSesstionFactory().openSession();
 	public StudentController() {
 		 this.student = new GeneriDaoImpl<Student>(Student.class);
 	}
@@ -62,7 +61,6 @@ public class StudentController {
 	@Path("{id}")
 	public Response updateStudent(@PathParam("id") int id,Student newDetails) throws InterruptedException {
 		this.student.updateObject(newDetails, id);	
-		System.out.println("hellooooooooo");
 		return Response.ok(200).build();
 	}
 	
