@@ -2,6 +2,7 @@ package School.hello.Dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 import org.hibernate.Session;
@@ -12,6 +13,8 @@ import School.hello.Utility.HibernateUtility;
 @SuppressWarnings("unchecked")
 public class GeneriDaoImpl<T> implements GenericDao<T> {
 
+	EntityManagerFactory test = 
+	
 	Session session = HibernateUtility.getSesstionFactory().openSession();
 	private Class<T> runTimeClass ;
 	private String className;
