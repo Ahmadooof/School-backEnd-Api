@@ -13,7 +13,6 @@ import School.hello.Utility.HibernateUtility;
 @SuppressWarnings("unchecked")
 public class GeneriDaoImpl<T> implements GenericDao<T> {
 
-	EntityManagerFactory test = 
 	
 	Session session = HibernateUtility.getSesstionFactory().openSession();
 	private Class<T> runTimeClass ;
